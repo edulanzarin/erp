@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: contiva-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: masterkey
+      POSTGRES_DB: contiva
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
