@@ -1,5 +1,7 @@
 package com.edulanzarin.erp.core.config;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -19,15 +21,21 @@ public class AdminSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // só cria o admin se a tabela de usuários estiver totalmente vazia
-        if (usuarioRepository.count() == 0) {
+        String emailAdmin = "admin@contiva.com";
+        String senhaAdmin = "masterkey";
+
+        Optional<Usuario> adminExistente = usuarioRepository.findByEmail(emailAdmin);
+
+        if (adminExistente.isEmpty()) {
             Usuario admin = new Usuario();
             admin.setNome("Administrador Contiva");
-            admin.setEmail("admin@contiva.com");
-            admin.setSenha(passwordEncoder.encode("123456"));
-
+            admin.setEmail(emailAdmin);
+            admin.setSenha(passwordEncoder.encode(senhaAdmin));
             usuarioRepository.save(admin);
-            System.out.println("Usuário admin@contiva.com criado com senha 123456");
+        } else {
+            Usuario admin = adminExistente.get();
+            admin.setSenha(passwordEncoder.encode(senhaAdmin));
+            usuarioRepository.save(admin);
         }
     }
 }

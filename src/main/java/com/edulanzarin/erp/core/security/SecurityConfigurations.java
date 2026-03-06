@@ -28,10 +28,6 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // a api é stateless, não guarda sessão
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();
-
-                    // liberar a criação de um admin inicial
-                    // req.requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll();
-
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
