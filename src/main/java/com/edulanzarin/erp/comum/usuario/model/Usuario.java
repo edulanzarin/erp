@@ -1,4 +1,4 @@
-package com.edulanzarin.erp.common.usuario.model;
+package com.edulanzarin.erp.comum.usuario.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,24 +18,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "grupo")
+@Table(name = "usuario")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Grupo extends BaseEntity {
+public class Usuario extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String nome;
 
-    @Column
-    private String descricao;
+    @Column(nullable = false, unique = true)
+    private String email;
 
+    @Column(nullable = false)
+    private String senha;
+
+    // um usuario pode ter varios grupos e um grupo pode ter varios usuarios
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "grupo_permissao",
-        joinColumns = @JoinColumn(name = "grupo_id"),
-        inverseJoinColumns = @JoinColumn(name = "permissao_id")
+        name = "usuario_grupo",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "grupo_id")
     )
-    private Set<Permissao> permissoes = new HashSet<>();
+    private Set<Grupo> grupos = new HashSet<>();
 }

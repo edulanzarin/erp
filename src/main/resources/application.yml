@@ -15,3 +15,8 @@ spring:
     properties:
       "[hibernate.format_sql]": true
       "[hibernate.dialect]": org.hibernate.dialect.PostgreSQLDialect
+
+api:
+  security:
+    token:
+      secret: mqE9a/3KhQWPPser4MOGsfI4u+X6Jj0a6vAfkjBFeJE=

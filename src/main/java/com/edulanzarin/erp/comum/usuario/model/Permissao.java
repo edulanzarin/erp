@@ -1,4 +1,4 @@
-package com.edulanzarin.erp.common.usuario.model;
+package com.edulanzarin.erp.comum.usuario.model;
 
 import com.edulanzarin.erp.core.model.BaseEntity;
 
